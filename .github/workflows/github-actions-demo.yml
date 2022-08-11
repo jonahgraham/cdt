@@ -23,9 +23,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn clean verify -B -V \
-              -Dmaven.test.failure.ignore=true \
-              -DexcludedGroups=flakyTest,slowTest \
-              -P baseline-compare-and-replace \
-              -Ddsf.gdb.tests.timeout.multiplier=50 \
-              -Dindexer.timeout=300
+      run: mvn clean verify -B -V
+             -Dmaven.test.failure.ignore=true
+             -DexcludedGroups=flakyTest,slowTest
+             -P baseline-compare-and-replace
+             -Ddsf.gdb.tests.timeout.multiplier=50
+             -Dindexer.timeout=300
