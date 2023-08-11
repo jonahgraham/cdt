@@ -25,7 +25,7 @@ import org.eclipse.jface.viewers.ViewerSorter;
  * @deprecated as of CDT 4.0. This class was used for property pages
  * for 3.X style projects.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class CPElementSorter extends ViewerSorter {
 
 	private static final int SOURCE = 0;

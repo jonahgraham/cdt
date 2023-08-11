@@ -15,36 +15,26 @@
  *******************************************************************************/
 package org.eclipse.cdt.make.internal.core;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.eclipse.cdt.core.CCorePlugin;
 import org.eclipse.cdt.core.ICDescriptor;
 import org.eclipse.cdt.core.settings.model.ICStorageElement;
-import org.eclipse.cdt.core.settings.model.XmlStorageUtil;
 import org.eclipse.cdt.make.core.IMakeCommonBuildInfo;
 import org.eclipse.cdt.make.core.IMakeTarget;
 import org.eclipse.cdt.make.core.MakeCorePlugin;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.w3c.dom.Document;
 
 public class ProjectTargets {
 
 	private static final String MAKE_TARGET_KEY = MakeCorePlugin.getUniqueIdentifier() + ".buildtargets"; //$NON-NLS-1$
-	private static final String TARGETS_EXT = "targets"; //$NON-NLS-1$
 
 	private static final String BUILD_TARGET_ELEMENT = "buildTargets"; //$NON-NLS-1$
 	private static final String TARGET_ELEMENT = "target"; //$NON-NLS-1$
@@ -64,39 +54,13 @@ public class ProjectTargets {
 	private IProject project;
 
 	public ProjectTargets(MakeTargetManager manager, IProject project) {
-		boolean writeTargets = false;
-		File targetFile = null;
-
 		this.project = project;
 
 		ICStorageElement rootElement = null;
 		try {
 			ICDescriptor descriptor = CCorePlugin.getDefault().getCProjectDescription(getProject(), true);
 			rootElement = descriptor.getProjectStorageElement(MAKE_TARGET_KEY);
-
-			//Historical ... fall back to the workspace and look in previous XML file location
-			if (rootElement.getChildren().length == 0) {
-				IPath targetFilePath = MakeCorePlugin.getDefault().getStateLocation().append(project.getName())
-						.addFileExtension(TARGETS_EXT);
-				targetFile = targetFilePath.toFile();
-				try {
-					InputStream input = new FileInputStream(targetFile);
-					ICStorageElement oldElement = translateInputStreamToDocument(input);
-					rootElement.importChild(oldElement);
-					writeTargets = true; // update the project description
-				} catch (FileNotFoundException ex) {
-					/* Ignore */
-				}
-			}
-
 			extractMakeTargetsFromDocument(rootElement, manager);
-			// If write targets then we have converted previous make targets
-			if (writeTargets) {
-				saveTargets();
-				if (targetFile != null) {
-					targetFile.delete(); // removed old
-				}
-			}
 		} catch (Exception e) {
 			MakeCorePlugin.log(e);
 		}
@@ -227,22 +191,6 @@ public class ProjectTargets {
 
 		//Save the results
 		descriptor.saveProjectData();
-	}
-
-	/**
-	 * This method loads an old style XML document provided in the input stream
-	 * and returns an ICStorageElemnt wrapping it.
-	 *
-	 * @return ICStorageElement or null
-	 */
-	protected ICStorageElement translateInputStreamToDocument(InputStream input) {
-		try {
-			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(input);
-			return XmlStorageUtil.createCStorageTree(document);
-		} catch (Exception e) {
-			MakeCorePlugin.log(e);
-		}
-		return null;
 	}
 
 	/**

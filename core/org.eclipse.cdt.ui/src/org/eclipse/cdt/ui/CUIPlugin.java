@@ -135,10 +135,16 @@ public class CUIPlugin extends AbstractUIPlugin {
 
 	public final static String CWIZARD_CATEGORY_ID = "org.eclipse.cdt.ui.newCWizards"; //$NON-NLS-1$
 	/** @deprecated This wizard category has been merged with the {@link #CWIZARD_CATEGORY_ID c wizard category} */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public final static String CCWIZARD_CATEGORY_ID = "org.eclipse.cdt.ui.newCCWizards"; //$NON-NLS-1$
 
 	public static final String SEARCH_ACTION_SET_ID = PLUGIN_ID + ".SearchActionSet"; //$NON-NLS-1$
+	/**
+	 * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+	 * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+	 * opening project files created before this point.
+	 */
+	@Deprecated(forRemoval = true)
 	public static final String BUILDER_ID = PLUGIN_CORE_ID + ".cbuilder"; //$NON-NLS-1$
 
 	private static CUIPlugin fgCPlugin;
@@ -158,7 +164,7 @@ public class CUIPlugin extends AbstractUIPlugin {
 	 *
 	 * @deprecated This perspective no longer exists.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static final String ID_CHIERARCHY_PERSPECTIVE = PLUGIN_ID + ".CHierarchyPerspective"; //$NON-NLS-1$
 
 	/**
@@ -168,7 +174,7 @@ public class CUIPlugin extends AbstractUIPlugin {
 	 * @since 2.0
 	 * @deprecated This perspective no longer exists.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static final String ID_CBROWSING_PERSPECTIVE = PLUGIN_ID + ".CBrowsingPerspective"; //$NON-NLS-1$
 
 	/**
@@ -179,7 +185,7 @@ public class CUIPlugin extends AbstractUIPlugin {
 	 * @deprecated This view no longer exists.
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static String ID_PROJECTS_VIEW = PLUGIN_ID + ".ProjectsView"; //$NON-NLS-1$
 
 	/**
@@ -190,7 +196,7 @@ public class CUIPlugin extends AbstractUIPlugin {
 	 * @deprecated This view no longer exists.
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static String ID_NAMESPACES_VIEW = PLUGIN_ID + ".NamespacesView"; //$NON-NLS-1$
 
 	/**
@@ -201,7 +207,7 @@ public class CUIPlugin extends AbstractUIPlugin {
 	 * @deprecated This view no longer exists.
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static String ID_TYPES_VIEW = PLUGIN_ID + ".TypesView"; //$NON-NLS-1$
 
 	/**
@@ -212,7 +218,7 @@ public class CUIPlugin extends AbstractUIPlugin {
 	 * @deprecated This view no longer exists.
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static String ID_MEMBERS_VIEW = PLUGIN_ID + ".MembersView"; //$NON-NLS-1$
 
 	/**
@@ -256,7 +262,7 @@ public class CUIPlugin extends AbstractUIPlugin {
 	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated use {@link CDTUITools#getWorkingCopyManager()}, instead.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public synchronized IBufferFactory getBufferFactory() {
 		return ((WorkingCopyManager) getWorkingCopyManager()).getBufferFactory();
 	}
@@ -346,7 +352,7 @@ public class CUIPlugin extends AbstractUIPlugin {
 	/**
 	 * @deprecated Use {@link #logError(String)}
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void logErrorMessage(String message) {
 		log(new Status(IStatus.ERROR, PLUGIN_ID, ICStatusConstants.INTERNAL_ERROR, message, null));
 	}
@@ -741,7 +747,7 @@ public class CUIPlugin extends AbstractUIPlugin {
 	 * @deprecated Use {@link EditorsUI#getSharedTextColors()} instead.
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public ISharedTextColors getSharedTextColors() {
 		return EditorsUI.getSharedTextColors();
 	}

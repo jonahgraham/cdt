@@ -56,7 +56,7 @@ import org.eclipse.ui.PlatformUI;
  *
  * @noextend This class is not intended to be subclassed by clients.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class BinaryParserBlock extends AbstractBinaryParserPage {
 	private static final int DEFAULT_HEIGHT = 160;
 	private static final String PREFIX = "BinaryParserBlock"; //$NON-NLS-1$

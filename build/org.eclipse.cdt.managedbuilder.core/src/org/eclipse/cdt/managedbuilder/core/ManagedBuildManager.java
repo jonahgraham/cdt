@@ -1085,6 +1085,12 @@ public class ManagedBuildManager extends AbstractCExtension {
 		}
 	}
 
+	/**
+	 * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+	 * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+	 * opening project files created before this point.
+	 */
+	@Deprecated(forRemoval = true)
 	public static boolean saveBuildInfoLegacy(IProject project, boolean force) {
 		// Create document
 		Exception err = null;
@@ -1392,7 +1398,7 @@ public class ManagedBuildManager extends AbstractCExtension {
 	 * Unreferenced in CDT
 	 * @deprecated
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static void updateCoreSettings(IConfiguration cfg) throws CoreException {
 		IProject project = cfg.getOwner().getProject();
 		ICProjectDescription projDes = CoreModel.getDefault().getProjectDescription(project);
@@ -1824,7 +1830,11 @@ public class ManagedBuildManager extends AbstractCExtension {
 	/**
 	 * Load the build information for the specified resource from its project
 	 * file. Pay attention to the version number too.
+	 * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+	 * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+	 * opening project files created before this point.
 	 */
+	@Deprecated(forRemoval = true)
 	private static ManagedBuildInfo loadOldStyleBuildInfo(final IProject project) throws Exception {
 		ManagedBuildInfo buildInfo = null;
 		IFile file = project.getFile(SETTINGS_FILE_NAME);
@@ -2805,6 +2815,12 @@ public class ManagedBuildManager extends AbstractCExtension {
 		return getBuildInfo(resource, true);
 	}
 
+	/**
+	 * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+	 * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+	 * opening project files created before this point.
+	 */
+	@Deprecated(forRemoval = true)
 	public static IManagedBuildInfo getOldStyleBuildInfo(IProject project) throws CoreException {
 		IManagedBuildInfo info = null;
 		try {
@@ -2828,6 +2844,12 @@ public class ManagedBuildManager extends AbstractCExtension {
 
 	}
 
+	/**
+	 * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+	 * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+	 * opening project files created before this point.
+	 */
+	@Deprecated(forRemoval = true)
 	public static synchronized IManagedBuildInfo getBuildInfoLegacy(IProject project) {
 		try {
 			return getOldStyleBuildInfo(project);
@@ -3770,7 +3792,7 @@ public class ManagedBuildManager extends AbstractCExtension {
 	 * @deprecated as of CDT 8.3. This method is useless as API as it does something very specfic to {@link BuildEntryStorage}.
 	 *    It was moved there as private method {@link BuildEntryStorage#locationToFullPath}.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public static String locationToFullPath(String path) {
 		Assert.isLegal(false, "Do not use this method"); //$NON-NLS-1$
 		return null;

@@ -64,7 +64,7 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
  * @deprecated as of CDT 4.0. This tab was used to set preferences/properties
  * for 3.X style projects.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class CPathOutputEntryPage extends CPathBasePage {
 
 	private ListDialogField<CPElement> fCPathList;

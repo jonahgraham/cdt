@@ -34,7 +34,7 @@ import org.eclipse.ui.help.IWorkbenchHelpSystem;
  * @deprecated as of CDT 4.0. This option block was used to set preferences/properties
  * for 3.X style projects.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class MakeProjectOptionBlock extends TabFolderOptionBlock {
 	private ICOptionContainer optionContainer;
 

@@ -26,10 +26,10 @@ public interface IMakeBuilderInfo extends IMakeCommonBuildInfo {
 	public final static String BUILD_TARGET_CLEAN = ARGS_PREFIX + ".build.target.clean"; //$NON-NLS-1$
 
 	/** @deprecated  as of CDT 4.0 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public final static String BUILD_TARGET_INCREAMENTAL = BUILD_TARGET_INCREMENTAL;
 	/** @deprecated  as of CDT 4.0 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public final static String BUILD_TARGET_FULL = ARGS_PREFIX + ".build.target.full"; //$NON-NLS-1$
 
 	boolean isAutoBuildEnable();
@@ -41,7 +41,7 @@ public interface IMakeBuilderInfo extends IMakeCommonBuildInfo {
 	/**
 	 * @deprecated as of CDT 4.0
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	void setAutoBuildTarget(String target) throws CoreException;
 
 	boolean isIncrementalBuildEnabled();
@@ -53,7 +53,7 @@ public interface IMakeBuilderInfo extends IMakeCommonBuildInfo {
 	/**
 	 * @deprecated as of CDT 4.0
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	void setIncrementalBuildTarget(String target) throws CoreException;
 
 	boolean isFullBuildEnabled();
@@ -65,7 +65,7 @@ public interface IMakeBuilderInfo extends IMakeCommonBuildInfo {
 	/**
 	 * @deprecated as of CDT 4.0
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	void setFullBuildTarget(String target) throws CoreException;
 
 	String getCleanBuildTarget();
@@ -73,7 +73,7 @@ public interface IMakeBuilderInfo extends IMakeCommonBuildInfo {
 	/**
 	 * @deprecated as of CDT 4.0
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	void setCleanBuildTarget(String target) throws CoreException;
 
 	boolean isCleanBuildEnabled();

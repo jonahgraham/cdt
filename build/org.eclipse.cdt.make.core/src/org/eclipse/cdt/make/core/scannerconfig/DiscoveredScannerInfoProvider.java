@@ -42,7 +42,7 @@ import org.eclipse.core.runtime.QualifiedName;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class DiscoveredScannerInfoProvider extends ScannerProvider {
 
 	// This is the id of the IScannerInfoProvider extension point entry

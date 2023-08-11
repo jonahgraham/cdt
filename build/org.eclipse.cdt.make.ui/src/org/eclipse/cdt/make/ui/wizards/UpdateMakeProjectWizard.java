@@ -21,7 +21,11 @@ import org.eclipse.jface.wizard.Wizard;
 /**
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
+ * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+ * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+ * opening project files created before this point.
  */
+@Deprecated(forRemoval = true)
 public class UpdateMakeProjectWizard extends Wizard {
 	private static final String MAKE_UPDATE_WINDOW_TITLE = "MakeWizardUpdate.window_title"; //$NON-NLS-1$
 

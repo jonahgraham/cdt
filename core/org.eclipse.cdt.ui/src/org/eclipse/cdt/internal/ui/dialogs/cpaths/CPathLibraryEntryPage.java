@@ -62,7 +62,7 @@ import org.eclipse.ui.views.navigator.ResourceComparator;
  * @deprecated as of CDT 4.0. This tab was used to set preferences/properties
  * for 3.X style projects.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class CPathLibraryEntryPage extends CPathBasePage {
 	private ListDialogField<CPElement> fCPathList;
 	private ICProject fCurrCProject;

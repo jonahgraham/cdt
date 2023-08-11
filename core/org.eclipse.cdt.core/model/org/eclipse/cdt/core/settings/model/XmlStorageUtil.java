@@ -29,7 +29,11 @@ import org.w3c.dom.NodeList;
  *
  * @noextend This class is not intended to be subclassed by clients.
  * @since 5.1
+ * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+ * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+ * opening project files created before this point.
  */
+@Deprecated(forRemoval = true)
 public class XmlStorageUtil {
 
 	/**

@@ -20,18 +20,20 @@ import java.util.List;
 import org.eclipse.cdt.internal.autotools.ui.ErrorParserBlock;
 import org.eclipse.cdt.managedbuilder.ui.properties.ManagedBuilderUIPlugin;
 import org.eclipse.cdt.managedbuilder.ui.wizards.MBSCustomPageManager;
+import org.eclipse.cdt.ui.dialogs.ICOptionContainerExtension;
 import org.eclipse.cdt.ui.dialogs.ICOptionPage;
 import org.eclipse.cdt.ui.dialogs.TabFolderOptionBlock;
 import org.eclipse.cdt.ui.newui.CDTHelpContextIds;
-import org.eclipse.cdt.ui.wizards.NewCProjectWizardOptionPage;
+import org.eclipse.cdt.ui.wizards.NewCProjectWizard;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.jface.wizard.IWizardPage;
+import org.eclipse.jface.wizard.WizardPage;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.PlatformUI;
 
-@SuppressWarnings("deprecation")
-public class NewAutotoolsProjectOptionPage extends NewCProjectWizardOptionPage {
+public class NewAutotoolsProjectOptionPage extends WizardPage implements ICOptionContainerExtension {
 
 	public static final String PAGE_ID = "org.eclipse.cdt.managedbuilder.ui.wizard.projectOptionsPage"; //$NON-NLS-1$
 
@@ -89,16 +91,16 @@ public class NewAutotoolsProjectOptionPage extends NewCProjectWizardOptionPage {
 	}
 
 	protected ManagedWizardOptionBlock optionBlock;
+	private TabFolderOptionBlock fOptionBlock;
 
 	/**
 	 * @param pageName
 	 */
 	public NewAutotoolsProjectOptionPage(String pageName) {
-		super(pageName);
+		super(pageName, null, null);
 		optionBlock = new ManagedWizardOptionBlock(this);
 	}
 
-	@Override
 	protected TabFolderOptionBlock createOptionBlock() {
 		return optionBlock;
 	}
@@ -127,6 +129,38 @@ public class NewAutotoolsProjectOptionPage extends NewCProjectWizardOptionPage {
 	@Override
 	public IWizardPage getNextPage() {
 		return MBSCustomPageManager.getNextPage(PAGE_ID); // get first custom page, if any
+	}
+
+	@Override
+	public void createControl(Composite parent) {
+		fOptionBlock = createOptionBlock();
+		setControl(fOptionBlock.createContents(parent));
+	}
+
+	@Override
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+		fOptionBlock.setVisible(visible);
+		updateContainer();
+	}
+
+	@Override
+	public void updateContainer() {
+		fOptionBlock.update();
+		setPageComplete(fOptionBlock.isValid());
+		setErrorMessage(fOptionBlock.getErrorMessage());
+	}
+
+	public void performApply(IProgressMonitor monitor) {
+		fOptionBlock.performApply(monitor);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.cdt.ui.dialogs.ICOptionContainer#getProject()
+	 */
+	@Override
+	public IProject getProjectHandle() {
+		return ((NewCProjectWizard) getWizard()).getProjectHandle();
 	}
 
 }

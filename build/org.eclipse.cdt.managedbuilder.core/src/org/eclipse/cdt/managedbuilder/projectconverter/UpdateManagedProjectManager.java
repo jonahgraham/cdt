@@ -45,7 +45,12 @@ import org.osgi.framework.Version;
 /**
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
+/**
+ * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+ * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+ * opening project files created before this point.
  */
+@Deprecated(forRemoval = true)
 public class UpdateManagedProjectManager {
 	static private ThreadLocal<Map<String, UpdateManagedProjectManager>> fThreadInfo = new ThreadLocal<>();
 	static private IOverwriteQuery fBackupFileOverwriteQuery = null;
@@ -346,26 +351,10 @@ public class UpdateManagedProjectManager {
 			if (projectFile.exists())
 				backupFile(projectFile, "_initial", monitor, fProject); //$NON-NLS-1$
 
-			if (version.equals(new Version(1, 2, 0))) {
-				UpdateManagedProject12.doProjectUpdate(monitor, fProject);
-				version = getManagedBuildInfoVersion(info.getVersion());
-			}
-			if (version.equals(new Version(2, 0, 0))) {
-				UpdateManagedProject20.doProjectUpdate(monitor, fProject);
-				version = getManagedBuildInfoVersion(info.getVersion());
-			}
-			if (version.equals(new Version(2, 1, 0))) {
-				UpdateManagedProject21.doProjectUpdate(monitor, fProject);
-				version = getManagedBuildInfoVersion(info.getVersion());
-			}
-			if (version.equals(new Version(3, 0, 0))) {
-				UpdateManagedProject30.doProjectUpdate(monitor, fProject);
-				version = getManagedBuildInfoVersion(info.getVersion());
-			}
-			if (new Version(4, 0, 0).compareTo(version) > 0) {
-				UpdateManagedProject31.doProjectUpdate(monitor, fProject);
-				version = getManagedBuildInfoVersion(info.getVersion());
-			}
+			// The code here used to support upgrading from CDT project versions < 4.0 to 4.0 version.
+			// As of this writing (Summer 2023) it has been more than 15 years since version 4.0
+			// was released. If there is a future version bump, here is where the convert code
+			// can fit. Refer to git history on how to write the converters.
 
 			if (!isCompatibleProject(info)) {
 				throw new CoreException(new Status(IStatus.ERROR, ManagedBuilderCorePlugin.getUniqueIdentifier(), -1,

@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 /**
  * @deprecated as of CDT 4.0. Being kept here for API compatibility only.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public abstract class NewCCProjectWizard extends NewCProjectWizard {
 
 	public NewCCProjectWizard() {

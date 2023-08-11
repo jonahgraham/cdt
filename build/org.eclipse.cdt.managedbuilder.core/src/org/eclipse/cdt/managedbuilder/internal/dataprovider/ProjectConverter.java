@@ -56,22 +56,24 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRunnable;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.IOverwriteQuery;
 
+/**
+ * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+ * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+ * opening project files created before this point.
+ */
+@Deprecated(forRemoval = true)
 public class ProjectConverter implements ICProjectConverter {
 	private final static String OLD_MAKE_BUILDER_ID = "org.eclipse.cdt.make.core.makeBuilder"; //$NON-NLS-1$
 	private final static String OLD_MAKE_NATURE_ID = "org.eclipse.cdt.make.core.makeNature"; //$NON-NLS-1$
@@ -445,130 +447,12 @@ public class ProjectConverter implements ICProjectConverter {
 		}
 	}
 
-	private static boolean convertOldStdMakeToNewStyle(final IProject project, boolean checkOnly,
-			IProgressMonitor monitor, boolean throwExceptions) throws CoreException {
-		try {
-			//			ICDescriptor dr = CCorePlugin.getDefault().getCProjectDescription(project, false);
-			//			if(dr == null){
-			//				if(throwExceptions)
-			//					throw new CoreException(new Status(IStatus.ERROR,
-			//							ManagedBuilderCorePlugin.getUniqueIdentifier(),
-			//							DataProviderMessages.getString("ProjectConverter.0"))); //$NON-NLS-1$
-			//				return false;
-			//			}
-			//
-			//			if(!MakeCorePlugin.MAKE_PROJECT_ID.equals(dr.getProjectOwner().getID())){
-			//				if(throwExceptions)
-			//					throw new CoreException(new Status(IStatus.ERROR,
-			//							ManagedBuilderCorePlugin.getUniqueIdentifier(),
-			//							DataProviderMessages.getString("ProjectConverter.1") + dr.getProjectOwner().getID())); //$NON-NLS-1$
-			//				return false;
-			//			}
-
-			ICProjectDescription des = CCorePlugin.getDefault().getProjectDescription(project, false);
-
-			if (des == null) {
-				if (throwExceptions)
-					throw new CoreException(new Status(IStatus.ERROR, ManagedBuilderCorePlugin.getUniqueIdentifier(),
-							DataProviderMessages.getString("ProjectConverter.9"))); //$NON-NLS-1$
-				return false;
-			}
-
-			ICConfigurationDescription cfgs[] = des.getConfigurations();
-			if (cfgs.length != 1) {
-				if (throwExceptions)
-					throw new CoreException(new Status(IStatus.ERROR, ManagedBuilderCorePlugin.getUniqueIdentifier(),
-							DataProviderMessages.getString("ProjectConverter.2") + cfgs.length)); //$NON-NLS-1$
-				return false;
-			}
-
-			if (!CCorePlugin.DEFAULT_PROVIDER_ID.equals(cfgs[0].getBuildSystemId())) {
-				if (throwExceptions)
-					throw new CoreException(new Status(IStatus.ERROR, ManagedBuilderCorePlugin.getUniqueIdentifier(),
-							DataProviderMessages.getString("ProjectConverter.3") + cfgs.length)); //$NON-NLS-1$
-				return false;
-			}
-
-			final IProjectDescription eDes = project.getDescription();
-			String natureIds[] = eDes.getNatureIds();
-			Set<String> set = new HashSet<>(Arrays.asList(natureIds));
-			if (!set.contains(OLD_MAKE_NATURE_ID)) {
-				if (throwExceptions)
-					throw new CoreException(new Status(IStatus.ERROR, ManagedBuilderCorePlugin.getUniqueIdentifier(),
-							DataProviderMessages.getString("ProjectConverter.4") + natureIds.toString())); //$NON-NLS-1$
-				return false;
-			}
-
-			if (!checkOnly) {
-				ProjectConverter instance = new ProjectConverter();
-				ICProjectDescription oldDes = CCorePlugin.getDefault().getProjectDescription(project);
-				if (!instance.canConvertProject(project, MakeCorePlugin.MAKE_PROJECT_ID, oldDes)) {
-					if (throwExceptions)
-						throw new CoreException(
-								new Status(IStatus.ERROR, ManagedBuilderCorePlugin.getUniqueIdentifier(),
-										DataProviderMessages.getString("ProjectConverter.5"))); //$NON-NLS-1$
-					return false;
-				}
-
-				final ICProjectDescription newDes = instance.convertProject(project, eDes,
-						MakeCorePlugin.MAKE_PROJECT_ID, oldDes);
-				if (newDes == null) {
-					if (throwExceptions)
-						throw new CoreException(
-								new Status(IStatus.ERROR, ManagedBuilderCorePlugin.getUniqueIdentifier(),
-										DataProviderMessages.getString("ProjectConverter.6"))); //$NON-NLS-1$
-					return false;
-				}
-
-				final IWorkspace wsp = ResourcesPlugin.getWorkspace();
-				wsp.run((IWorkspaceRunnable) monitor1 -> {
-					project.setDescription(eDes, monitor1);
-					CCorePlugin.getDefault().setProjectDescription(project, newDes);
-					Job job = new Job(DataProviderMessages.getString("ProjectConverter.7")) { //$NON-NLS-1$
-
-						@Override
-						protected IStatus run(IProgressMonitor monitor) {
-							try {
-								ICProjectDescription des = CCorePlugin.getDefault().getProjectDescription(project);
-								convertMakeTargetInfo(project, des, monitor);
-								CCorePlugin.getDefault().setProjectDescription(project, des);
-							} catch (CoreException e) {
-								return e.getStatus();
-							}
-							return Status.OK_STATUS;
-						}
-
-					};
-
-					job.setRule(wsp.getRoot());
-					job.schedule();
-				}, wsp.getRoot(), IWorkspace.AVOID_UPDATE, monitor);
-			}
-			return true;
-		} catch (CoreException e) {
-			if (throwExceptions)
-				throw e;
-			ManagedBuilderCorePlugin.log(e);
-		}
-		if (throwExceptions)
-			throw new CoreException(new Status(IStatus.ERROR, ManagedBuilderCorePlugin.getUniqueIdentifier(),
-					DataProviderMessages.getString("ProjectConverter.8"))); //$NON-NLS-1$
-		return false;
-	}
-
-	public static boolean isOldStyleMakeProject(IProject project) {
-		try {
-			return convertOldStdMakeToNewStyle(project, true, null, false);
-		} catch (CoreException e) {
-			ManagedBuilderCorePlugin.log(e);
-		}
-		return false;
-	}
-
-	public static void convertOldStdMakeToNewStyle(IProject project, IProgressMonitor monitor) throws CoreException {
-		convertOldStdMakeToNewStyle(project, false, monitor, true);
-	}
-
+	/**
+	 * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+	 * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+	 * opening project files created before this point.
+	 */
+	@Deprecated(forRemoval = true)
 	private IManagedBuildInfo convertManagedBuildInfo(IProject project, ICProjectDescription newDes)
 			throws CoreException {
 		IManagedBuildInfo info = ManagedBuildManager.getOldStyleBuildInfo(project);

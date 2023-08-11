@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.Control;
  * @deprecated as of CDT 4.0. This option block was for property pages
  * for 3.X style projects.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class CPathTabBlock extends AbstractPathOptionBlock {
 
 	private final int[] pathTypes = { IPathEntry.CDT_SOURCE, IPathEntry.CDT_PROJECT, IPathEntry.CDT_OUTPUT,

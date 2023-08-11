@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Composite;
  * @deprecated as of CDT 4.0. This class used in property pages
  * for 3.X style projects.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public abstract class AbstractBinaryParserPage extends AbstractCOptionPage {
 
 	protected ICOptionPage fCurrentBinaryParserPage;

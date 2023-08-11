@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Composite;
  * @deprecated as of CDT 4.0. This tab was used to set preferences/properties
  * for 3.X style projects.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ErrorParserBlock extends AbstractErrorParserBlock {
 
 	// make builder enabled

@@ -45,7 +45,7 @@ import org.eclipse.ui.ide.IDE;
  * @deprecated as of CDT 4.0. This tab was used for property pages
  * for 3.X style projects.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class CPathProjectsEntryPage extends CPathBasePage {
 
 	private CheckedListDialogField<CPElement> fProjectsList;

@@ -38,7 +38,7 @@ import org.eclipse.ui.dialogs.PropertyPage;
  * This page lives dormant as of writing (CDT 7.0) but may get activated for
  * {@code org.eclipse.cdt.make.core.makeNature} project (3.X style).
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class MakePropertyPage extends PropertyPage implements ICOptionContainer {
 
 	MakeProjectOptionBlock fOptionBlock;

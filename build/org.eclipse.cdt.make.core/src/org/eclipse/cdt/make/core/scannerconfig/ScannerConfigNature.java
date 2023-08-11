@@ -39,7 +39,7 @@ import org.eclipse.core.runtime.CoreException;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ScannerConfigNature implements IProjectNature {
 
 	public final static String NATURE_ID = MakeCorePlugin.getUniqueIdentifier() + ".ScannerConfigNature"; //$NON-NLS-1$

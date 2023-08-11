@@ -116,7 +116,7 @@ public interface IBuilder extends IHoldsOptions, IMakeBuilderInfo {
 	 * @return IConfigurationElement
 	 * @deprecated - use getBuildFileGenerator() instead
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public IConfigurationElement getBuildFileGeneratorElement();
 
 	/**
@@ -207,7 +207,7 @@ public interface IBuilder extends IHoldsOptions, IMakeBuilderInfo {
 	 *
 	 * @deprecated as of CDT 4.0
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void setBuildFileGeneratorElement(IConfigurationElement element);
 
 	/**

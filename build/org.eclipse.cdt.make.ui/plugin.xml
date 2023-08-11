@@ -197,49 +197,6 @@
    </extension>
    <extension
          point="org.eclipse.ui.propertyPages">
-      <!--page
-            objectClass="org.eclipse.core.resources.IProject"
-            adaptable="true"
-            name="%PropertyMakeProject.name"
-            class="org.eclipse.cdt.make.internal.ui.properties.MakePropertyPage"
-            id="org.eclipse.cdt.make.ui.properties.MakePropertyPage">
-         <filter
-               name="nature"
-               value="org.eclipse.cdt.make.core.makeNature">
-         </filter>
-      </page>
-      <page
-            objectClass="org.eclipse.core.resources.IProject"
-            adaptable="true"
-            name="%ProjectPathProperties.name"
-            nameFilter="*"
-            class="org.eclipse.cdt.internal.ui.dialogs.cpaths.CPathPropertyPage"
-            id="org.eclipse.cdt.internal.ui.dialogs.cpath.CPathPropertyPage">
-         <filter
-               name="projectNature"
-               value="org.eclipse.cdt.make.core.makeNature">
-         </filter>
-      </page> 
-      <page
-            objectClass="org.eclipse.cdt.core.model.ICContainer"
-            name="%IncludeSymbolProperties.name"
-            class="org.eclipse.cdt.internal.ui.dialogs.cpaths.IncludesSymbolsPropertyPage"
-            id="org.eclipse.cdt.internal.ui.dialogs.cpath.IncludeSymbolsPropertyPage">
-         <filter
-               name="projectNature"
-               value="org.eclipse.cdt.make.core.makeNature">
-         </filter>
-      </page>
-      <page
-            objectClass="org.eclipse.cdt.core.model.ITranslationUnit"
-            name="%IncludeSymbolProperties.name"
-            class="org.eclipse.cdt.internal.ui.dialogs.cpaths.IncludesSymbolsPropertyPage"
-            id="org.eclipse.cdt.internal.ui.dialogs.cpath.IncludeSymbolsPropertyPage">
-         <filter
-               name="projectNature"
-               value="org.eclipse.cdt.make.core.makeNature">
-         </filter>
-      </page-->
       <page
             objectClass="org.eclipse.core.resources.IProject"
             adaptable="true"
@@ -279,32 +236,6 @@
    </extension>
    <extension
          point="org.eclipse.ui.actionSets">
-      <actionSet
-            label="%ActionSetUpdateMake.label"
-            id="org.eclipse.cdt.make.ui.updateActionSet">
-         <action
-               label="%ActionMakeUpdate.label"
-               icon="icons/etool16/update_old.gif"
-               tooltip="%ActionMakeUpdate.tooltip"
-               class="org.eclipse.cdt.make.ui.actions.UpdateMakeProjectAction"
-               toolbarPath="Normal"
-               id="org.eclipse.cdt.make.ui.UpdateMakeAction">
-            <enablement>
-               <and>
-                  <not>
-                     <objectState
-                           value="org.eclipse.cdt.make.core.makeNature"
-                           name="projectNature">
-                     </objectState>
-                  </not>
-                  <objectState
-                        value="org.eclipse.cdt.core.cnature"
-                        name="projectNature">
-                  </objectState>
-               </and>
-            </enablement>
-         </action>
-      </actionSet>
       <actionSet
             label="%ActionSetMake.label"
             id="org.eclipse.cdt.make.ui.makeTargetActionSet">

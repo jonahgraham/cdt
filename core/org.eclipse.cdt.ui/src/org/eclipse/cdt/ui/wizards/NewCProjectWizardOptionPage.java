@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Composite;
  * @deprecated as of CDT 4.0. This abstract was used for New Project Wizards
  * for 3.X style projects.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public abstract class NewCProjectWizardOptionPage extends WizardPage implements ICOptionContainerExtension {
 
 	private TabFolderOptionBlock fOptionBlock;

@@ -77,7 +77,7 @@ import org.eclipse.ui.dialogs.ListSelectionDialog;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class MakeEnvironmentBlock extends AbstractCOptionPage {
 
 	Preferences fPrefs;

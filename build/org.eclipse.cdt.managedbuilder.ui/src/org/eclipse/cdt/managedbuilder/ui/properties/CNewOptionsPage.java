@@ -26,7 +26,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class CNewOptionsPage extends NewCProjectWizardOptionPage {
 
 	public CNewOptionsPage(String pageName, String title, ImageDescriptor titleImage) {

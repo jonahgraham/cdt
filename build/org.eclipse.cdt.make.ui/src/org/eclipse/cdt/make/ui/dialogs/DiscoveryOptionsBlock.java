@@ -63,7 +63,7 @@ import org.eclipse.swt.widgets.Label;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class DiscoveryOptionsBlock extends AbstractDiscoveryOptionsBlock {
 	private static final String MISSING_BUILDER_MSG = "ScannerConfigOptionsDialog.label.missingBuilderInformation"; //$NON-NLS-1$
 

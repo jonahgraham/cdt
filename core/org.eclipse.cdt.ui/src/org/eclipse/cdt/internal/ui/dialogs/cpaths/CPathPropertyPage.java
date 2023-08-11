@@ -50,7 +50,7 @@ import org.eclipse.ui.dialogs.PropertyPage;
  * This page lives dormant as of writing (CDT 7.0) but may get activated for
  * {@code org.eclipse.cdt.make.core.makeNature} project (3.X style).
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class CPathPropertyPage extends PropertyPage implements IStatusChangeListener {
 
 	private static final String PAGE_SETTINGS = "CPathsPropertyPage"; //$NON-NLS-1$

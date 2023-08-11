@@ -43,7 +43,7 @@ import org.eclipse.core.runtime.SubProgressMonitor;
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ScannerConfigBuilder extends ACBuilder {
 	public final static String BUILDER_ID = MakeCorePlugin.getUniqueIdentifier() + ".ScannerConfigBuilder"; //$NON-NLS-1$
 

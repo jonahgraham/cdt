@@ -22,7 +22,6 @@ import org.eclipse.cdt.managedbuilder.internal.buildmodel.BuildStateManager;
 import org.eclipse.cdt.managedbuilder.internal.buildmodel.DbgUtil;
 import org.eclipse.cdt.managedbuilder.internal.core.BuilderFactory;
 import org.eclipse.cdt.managedbuilder.internal.core.GeneratedMakefileBuilder;
-import org.eclipse.cdt.managedbuilder.internal.dataprovider.ProjectConverter;
 import org.eclipse.cdt.managedbuilder.internal.scannerconfig.ManagedBuildCPathEntryContainer;
 import org.eclipse.cdt.managedbuilder.internal.scannerconfig.ManagedBuildPathEntryContainerInitializer;
 import org.eclipse.core.resources.IProject;
@@ -296,12 +295,24 @@ public class ManagedBuilderCorePlugin extends Plugin {
 		return BuilderFactory.createBuilderForEclipseBuilder(cfg, eclipseBuilderID);
 	}
 
+	/**
+	 * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+	 * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+	 * opening project files created before this point.
+	 */
+	@Deprecated(forRemoval = true)
 	public boolean isOldStyleMakeProject(IProject project) {
-		return ProjectConverter.isOldStyleMakeProject(project);
+		throw new UnsupportedOperationException("Support for CDT project versions < 4.0 has been removed"); //$NON-NLS-1$
 	}
 
+	/**
+	 * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+	 * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+	 * opening project files created before this point.
+	 */
+	@Deprecated(forRemoval = true)
 	public void convertOldStdMakeToNewStyle(IProject project, IProgressMonitor monitor) throws CoreException {
-		ProjectConverter.convertOldStdMakeToNewStyle(project, monitor);
+		throw new UnsupportedOperationException("Support for CDT project versions < 4.0 has been removed"); //$NON-NLS-1$
 	}
 
 }

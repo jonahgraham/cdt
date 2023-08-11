@@ -96,6 +96,12 @@ public class MakeCorePlugin extends Plugin {
 
 	public static final String PLUGIN_ID = "org.eclipse.cdt.make.core"; //$NON-NLS-1$
 	public static final String MAKE_PROJECT_ID = MakeCorePlugin.getUniqueIdentifier() + ".make"; //$NON-NLS-1$
+	/**
+	 * @deprecated This code was to support importing CDT project versions < 4.0 to 4.0 version.
+	 * There is no replacement as 4.0.0 was introduced in 2007 and CDT does not support
+	 * opening project files created before this point.
+	 */
+	@Deprecated(forRemoval = true)
 	public static final String OLD_BUILDER_ID = "org.eclipse.cdt.core.cbuilder"; //$NON-NLS-1$
 
 	public static final String EXTERNAL_SI_PROVIDER_SIMPLE_ID = "ExternalScannerInfoProvider"; //$NON-NLS-1$
@@ -193,7 +199,7 @@ public class MakeCorePlugin extends Plugin {
 	/**
 	 * @deprecated as of CDT 5.0
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	static public IMakefile createMakefile(File file, boolean isGnuStyle, String[] makefileDirs) {
 		IMakefile makefile;
 		if (isGnuStyle) {

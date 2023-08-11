@@ -604,3 +604,73 @@ spelled BuiltinDetectionArgsGeneric instead.
 These APIs will be removed and remote connection for attach launch will be moved in the implementation of `IGDBProcesses.attachDebuggerToProcess()`.
 
 See https://github.com/eclipse-cdt/cdt/pull/336
+
+## API Removals after September 2025
+
+### Support for creating and opening projects in pre CDT 4.0 format will be removed
+
+All support for opening and creating projects for CDT that are not used by the CDT 4.0.0 file format and UI will be removed in a future version.
+Much of the code is internal code to CDT and not subject to API contracts and that part of the code may be removed before the public API.
+In addition there are plugin.xml (extensions) that reference this code that will be removed.
+
+This is a non-exhaustive list of classes, fields and methods that are expected to be removed.
+Due to how the CDT code evolved in the past many of the classes in this list have similar named, newer classes in newer packages.
+
+- org.eclipse.cdt.make.core.IMakeBuilderInfo.BUILD_TARGET_INCREAMENTAL
+- org.eclipse.cdt.make.core.IMakeBuilderInfo.BUILD_TARGET_FULL
+- org.eclipse.cdt.make.core.IMakeBuilderInfo.setAutoBuildTarget
+- org.eclipse.cdt.make.core.IMakeBuilderInfo.setIncrementalBuildTarget
+- org.eclipse.cdt.make.core.IMakeBuilderInfo.setFullBuildTarget
+- org.eclipse.cdt.make.core.IMakeBuilderInfo.setCleanBuildTarget
+- org.eclipse.cdt.make.core.MakeCorePlugin.OLD_BUILDER_ID
+- org.eclipse.cdt.make.core.MakeCorePlugin.createMakefile
+- org.eclipse.cdt.make.core.scannerconfig.DiscoveredScannerInfo
+- org.eclipse.cdt.make.core.scannerconfig.DiscoveredScannerInfoProvider
+- org.eclipse.cdt.make.core.scannerconfig.ScannerConfigBuilder
+- org.eclipse.cdt.make.core.scannerconfig.ScannerConfigNature
+- org.eclipse.cdt.make.ui.actions.UpdateMakeProjectAction
+- org.eclipse.cdt.make.ui.dialogs.DiscoveredPathContainerPage
+- org.eclipse.cdt.make.ui.dialogs.DiscoveryOptionsBlock
+- org.eclipse.cdt.make.ui.dialogs.SettingsBlock
+- org.eclipse.cdt.make.ui.wizards.UpdateMakeProjectWizard
+- org.eclipse.cdt.make.ui.wizards.UpdateMakeProjectWizardPage
+- org.eclipse.cdt.managedbuilder.core.IBuilder.getBuildFileGeneratorElement
+- org.eclipse.cdt.managedbuilder.core.IBuilder.setBuildFileGeneratorElement
+- org.eclipse.cdt.managedbuilder.core.ManagedBuildManager.initializePathEntries
+- org.eclipse.cdt.managedbuilder.core.ManagedBuildManager.updateCoreSettings
+- org.eclipse.cdt.managedbuilder.core.ManagedBuildManager.loadOldStyleBuildInfo
+- org.eclipse.cdt.managedbuilder.core.ManagedBuildManager.getOldStyleBuildInfo
+- org.eclipse.cdt.managedbuilder.core.ManagedBuildManager.getBuildInfoLegacy
+- org.eclipse.cdt.managedbuilder.core.ManagedBuildManager.locationToFullPath
+- org.eclipse.cdt.managedbuilder.core.ManagedBuilderCorePlugin.isOldStyleMakeProject
+- org.eclipse.cdt.managedbuilder.core.ManagedBuilderCorePlugin.convertOldStdMakeToNewStyle
+- org.eclipse.cdt.managedbuilder.projectconverter.UpdateManagedProject30
+- org.eclipse.cdt.managedbuilder.projectconverter.UpdateManagedProject31
+- org.eclipse.cdt.managedbuilder.projectconverter.UpdateManagedProjectManager
+- org.eclipse.cdt.newmake.core.IMakeBuilderInfo.BUILD_TARGET_INCREAMENTAL
+- org.eclipse.cdt.newmake.core.IMakeBuilderInfo.BUILD_TARGET_FULL
+- org.eclipse.cdt.newmake.core.IMakeBuilderInfo.setAutoBuildTarget
+- org.eclipse.cdt.newmake.core.IMakeBuilderInfo.setIncrementalBuildTarget
+- org.eclipse.cdt.newmake.core.IMakeBuilderInfo.setFullBuildTarget
+- org.eclipse.cdt.newmake.core.IMakeBuilderInfo.setCleanBuildTarget
+- org.eclipse.cdt.newmake.core.MakeScannerInfo
+- org.eclipse.cdt.managedbuilder.ui.properties.CNewOptionsPage
+- org.eclipse.cdt.core.settings.model.XmlStorageUtil
+- org.eclipse.cdt.ui.dialogs.AbstractBinaryParserPage
+- org.eclipse.cdt.ui.dialogs.BinaryParserBlock
+- org.eclipse.cdt.ui.dialogs.ReferenceBlock
+- org.eclipse.cdt.ui.wizards.NewCCProjectWizard
+- org.eclipse.cdt.ui.wizards.NewCProjectWizardOptionPage
+- org.eclipse.cdt.ui.CUIPlugin.CCWIZARD_CATEGORY_ID
+- org.eclipse.cdt.ui.CUIPlugin.BUILDER_ID
+- org.eclipse.cdt.ui.CUIPlugin.ID_CHIERARCHY_PERSPECTIVE
+- org.eclipse.cdt.ui.CUIPlugin.ID_CBROWSING_PERSPECTIVE
+- org.eclipse.cdt.ui.CUIPlugin.ID_PROJECTS_VIEW
+- org.eclipse.cdt.ui.CUIPlugin.ID_NAMESPACES_VIEW
+- org.eclipse.cdt.ui.CUIPlugin.ID_TYPES_VIEW
+- org.eclipse.cdt.ui.CUIPlugin.ID_MEMBERS_VIEW
+- org.eclipse.cdt.ui.CUIPlugin.getBufferFactory
+- org.eclipse.cdt.ui.CUIPlugin.logErrorMessage
+- org.eclipse.cdt.ui.CUIPlugin.getSharedTextColors
+
+See https://github.com/eclipse-cdt/cdt/issues/502

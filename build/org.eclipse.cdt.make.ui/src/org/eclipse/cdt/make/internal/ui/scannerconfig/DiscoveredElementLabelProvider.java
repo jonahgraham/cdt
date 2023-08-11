@@ -37,7 +37,7 @@ import org.eclipse.swt.widgets.Display;
  *
  * @author vhirsl
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class DiscoveredElementLabelProvider extends LabelProvider implements IColorProvider {
 	private final Color inDirect = new Color(Display.getDefault(), new RGB(170, 170, 170));
 

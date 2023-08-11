@@ -42,12 +42,9 @@ import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 /**
- * @deprecated as of CDT 4.0. This Block was used for New Project Wizard
- * for 3.X style projects.
- *
- * @noextend This class is not intended to be subclassed by clients.
+ * API note - at some point this class was marked Deprecated. But it is not API and is
+ * actually used still, therefore the Deprecation notice was removed for clarity.
  */
-@Deprecated
 public class ReferenceBlock extends AbstractCOptionPage {
 
 	private static final String PREFIX = "ReferenceBlock"; //$NON-NLS-1$

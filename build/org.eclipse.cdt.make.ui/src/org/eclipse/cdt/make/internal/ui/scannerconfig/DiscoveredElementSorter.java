@@ -22,7 +22,7 @@ import org.eclipse.jface.viewers.ViewerSorter;
  *
  * @author vhirsl
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class DiscoveredElementSorter extends ViewerSorter {
 	private static final int CONTAINER = 0;
 	private static final int PATHS_GROUP = 1;

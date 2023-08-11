@@ -46,7 +46,7 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
  *
  * @noextend This class is not intended to be subclassed by clients.
  */
-@Deprecated
+@Deprecated(forRemoval = true)
 public class ReferenceBlock extends AbstractCOptionPage {
 
 	private static final String PREFIX = "ReferenceBlock"; //$NON-NLS-1$
