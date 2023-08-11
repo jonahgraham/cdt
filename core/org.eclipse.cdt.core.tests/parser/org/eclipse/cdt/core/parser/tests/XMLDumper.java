@@ -23,10 +23,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.eclipse.cdt.internal.core.XmlProcessorFactoryCdt;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -53,7 +53,8 @@ public class XMLDumper {
 			Document document = dumper.getDocument();
 			StringWriter writer = new StringWriter();
 
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			Transformer transformer = XmlProcessorFactoryCdt.createTransformerFactoryWithErrorOnDOCTYPE()
+					.newTransformer();
 			transformer.transform(new DOMSource(document), new StreamResult(writer));
 
 			System.out.println("STRXML = " + writer.toString()); //Spit out DOM as a String //$NON-NLS-1$

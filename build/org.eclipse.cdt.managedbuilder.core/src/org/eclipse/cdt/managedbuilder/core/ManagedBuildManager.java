@@ -45,7 +45,6 @@ import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -67,6 +66,7 @@ import org.eclipse.cdt.core.settings.model.ICProjectDescriptionManager;
 import org.eclipse.cdt.core.settings.model.ICSettingEntry;
 import org.eclipse.cdt.core.settings.model.XmlStorageUtil;
 import org.eclipse.cdt.core.settings.model.extension.CConfigurationData;
+import org.eclipse.cdt.internal.core.XmlProcessorFactoryCdt;
 import org.eclipse.cdt.managedbuilder.buildproperties.IBuildProperty;
 import org.eclipse.cdt.managedbuilder.buildproperties.IBuildPropertyManager;
 import org.eclipse.cdt.managedbuilder.envvar.IEnvironmentVariableProvider;
@@ -1089,7 +1089,7 @@ public class ManagedBuildManager extends AbstractCExtension {
 		// Create document
 		Exception err = null;
 		try {
-			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			DocumentBuilder builder = XmlProcessorFactoryCdt.createDocumentBuilderWithErrorOnDOCTYPE();
 			Document doc = builder.newDocument();
 
 			// Get the build information for the project
@@ -1111,7 +1111,8 @@ public class ManagedBuildManager extends AbstractCExtension {
 
 				// Transform the document to something we can save in a file
 				ByteArrayOutputStream stream = new ByteArrayOutputStream();
-				Transformer transformer = TransformerFactory.newInstance().newTransformer();
+				Transformer transformer = XmlProcessorFactoryCdt.createTransformerFactoryWithErrorOnDOCTYPE()
+						.newTransformer();
 				transformer.setOutputProperty(OutputKeys.METHOD, "xml"); //$NON-NLS-1$
 				transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8"); //$NON-NLS-1$
 				transformer.setOutputProperty(OutputKeys.INDENT, "yes"); //$NON-NLS-1$

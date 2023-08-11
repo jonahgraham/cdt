@@ -25,7 +25,6 @@ import java.net.URI;
 import java.util.Arrays;
 
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -63,7 +62,7 @@ public class XmlUtil {
 	 * @throws ParserConfigurationException in case of a problem retrieving {@link DocumentBuilder}.
 	 */
 	public static Document newDocument() throws ParserConfigurationException {
-		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		DocumentBuilder builder = XmlProcessorFactoryCdt.createDocumentBuilderWithErrorOnDOCTYPE();
 		return builder.newDocument();
 	}
 
@@ -227,7 +226,7 @@ public class XmlUtil {
 	 */
 	private static Document loadXml(InputStream xmlStream) throws CoreException {
 		try {
-			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			DocumentBuilder builder = XmlProcessorFactoryCdt.createDocumentBuilderWithErrorOnDOCTYPE();
 			return builder.parse(xmlStream);
 		} catch (Exception e) {
 			throw new CoreException(CCorePlugin.createStatus(Messages.XmlUtil_InternalErrorLoading, e));
