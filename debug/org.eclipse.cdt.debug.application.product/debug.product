@@ -189,7 +189,7 @@ Java and all Java-based trademarks are trademarks of Oracle Corporation in the U
       <plugin id="com.sun.el.javax.el"/>
       <plugin id="com.sun.jna"/>
       <plugin id="com.sun.jna.platform"/>
-      <plugin id="com.sun.xml.bind"/>
+      <plugin id="com.sun.xml.bind.jaxb-osgi"/>
       <plugin id="jakarta.activation-api"/>
       <plugin id="jakarta.annotation-api"/>
       <plugin id="jakarta.inject.jakarta.inject-api"/>
