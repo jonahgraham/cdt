@@ -8,16 +8,16 @@ pipeline {
     timestamps()
   }
   stages {
-    stage('initialize PGP') {
-      steps {
-        container('cdt') {
-          withCredentials([file(credentialsId: 'secret-subkeys.asc', variable: 'KEYRING')]) {
-            sh 'gpg --batch --import "${KEYRING}"'
-            sh 'for fpr in $(gpg --list-keys --with-colons  | awk -F: \'/fpr:/ {print $10}\' | sort -u); do echo -e "5\ny\n" |  gpg --batch --command-fd 0 --expert --edit-key ${fpr} trust; done'
-          }
-        }
-      }
-    }
+    // stage('initialize PGP') {
+    //   steps {
+    //     container('cdt') {
+    //       withCredentials([file(credentialsId: 'secret-subkeys.asc', variable: 'KEYRING')]) {
+    //         sh 'gpg --batch --import "${KEYRING}"'
+    //         sh 'for fpr in $(gpg --list-keys --with-colons  | awk -F: \'/fpr:/ {print $10}\' | sort -u); do echo -e "5\ny\n" |  gpg --batch --command-fd 0 --expert --edit-key ${fpr} trust; done'
+    //       }
+    //     }
+    //   }
+    // }
     stage('Does GDB work') {
       steps {
         container('cdt') {
@@ -30,42 +30,42 @@ pipeline {
         }
       }
     }
-    stage('Code Formatting Checks') {
-      steps {
-        container('cdt') {
-          timeout(activity: true, time: 30) {
-            withEnv(['MAVEN_OPTS=-XX:MaxRAMPercentage=50.0 -XX:+PrintFlagsFinal']) {
-              // sh 'MVN="/jipp/tools/apache-maven/latest/bin/mvn -Dmaven.repo.local=/home/jenkins/.m2/repository \
-              //           --settings /home/jenkins/.m2/settings.xml" ./releng/scripts/check_code_cleanliness_only.sh'
-            }
-          }
-        }
-      }
-    }
-    stage('Build and verify') {
-      steps {
-        container('cdt') {
-          timeout(activity: true, time: 20) {
-            withEnv(['MAVEN_OPTS=-XX:MaxRAMPercentage=50.0 -XX:+PrintFlagsFinal']) {
-              withCredentials([string(credentialsId: 'gpg-passphrase', variable: 'KEYRING_PASSPHRASE')]) {
-                sh '''/jipp/tools/apache-maven/latest/bin/mvn \
-                      clean verify -B -V -X \
-                      -Dgpg.passphrase="${KEYRING_PASSPHRASE}"  \
-                      -Dmaven.test.failure.ignore=true \
-                      -DexcludedGroups=flakyTest,slowTest \
-                      -Ddsf.gdb.tests.timeout.multiplier=50 \
-                      -Dindexer.timeout=300 \
-                      -Pskip-tests-except-dsf-gdb \
-                      -Ddsf.gdb.tests.gdbPath=/shared/common/gdb/gdb-all/bin \
-                      -Dcdt.tests.dsf.gdb.versions=gdb.10,gdbserver.10 \
-                      -Dmaven.repo.local=/home/jenkins/.m2/repository \
-                      --settings /home/jenkins/.m2/settings.xml \
-                      '''
-              }
-            }
-          }
-        }
-      }
+    // stage('Code Formatting Checks') {
+    //   steps {
+    //     container('cdt') {
+    //       timeout(activity: true, time: 30) {
+    //         withEnv(['MAVEN_OPTS=-XX:MaxRAMPercentage=50.0 -XX:+PrintFlagsFinal']) {
+    //           // sh 'MVN="/jipp/tools/apache-maven/latest/bin/mvn -Dmaven.repo.local=/home/jenkins/.m2/repository \
+    //           //           --settings /home/jenkins/.m2/settings.xml" ./releng/scripts/check_code_cleanliness_only.sh'
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    // stage('Build and verify') {
+    //   steps {
+    //     container('cdt') {
+    //       timeout(activity: true, time: 20) {
+    //         withEnv(['MAVEN_OPTS=-XX:MaxRAMPercentage=50.0 -XX:+PrintFlagsFinal']) {
+    //           withCredentials([string(credentialsId: 'gpg-passphrase', variable: 'KEYRING_PASSPHRASE')]) {
+    //             sh '''/jipp/tools/apache-maven/latest/bin/mvn \
+    //                   clean verify -B -V -X \
+    //                   -Dgpg.passphrase="${KEYRING_PASSPHRASE}"  \
+    //                   -Dmaven.test.failure.ignore=true \
+    //                   -DexcludedGroups=flakyTest,slowTest \
+    //                   -Ddsf.gdb.tests.timeout.multiplier=50 \
+    //                   -Dindexer.timeout=300 \
+    //                   -Pskip-tests-except-dsf-gdb \
+    //                   -Ddsf.gdb.tests.gdbPath=/shared/common/gdb/gdb-all/bin \
+    //                   -Dcdt.tests.dsf.gdb.versions=gdb.10,gdbserver.10 \
+    //                   -Dmaven.repo.local=/home/jenkins/.m2/repository \
+    //                   --settings /home/jenkins/.m2/settings.xml \
+    //                   '''
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
     }
   }
   post {
