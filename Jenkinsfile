@@ -18,6 +18,17 @@ pipeline {
         }
       }
     }
+    stage('Does GDB work') {
+      steps {
+        container('cdt') {
+          timeout(activity: true, time: 30) {
+            withEnv(['MAVEN_OPTS=-XX:MaxRAMPercentage=50.0 -XX:+PrintFlagsFinal']) {
+              sh 'cd dsf-gdb/org.eclipse.cdt.tests.dsf.gdb/data/launch/src && make && cd ../../launch/bin/ && ./MemoryTestApp.exe ; echo $? ; /shared/common/gdb/gdb-all/bin/gdb.10 -ex run -ex quit MemoryTestApp.exe'
+            }
+          }
+        }
+      }
+    }
     stage('Code Formatting Checks') {
       steps {
         container('cdt') {
