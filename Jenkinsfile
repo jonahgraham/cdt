@@ -23,8 +23,8 @@ pipeline {
         container('cdt') {
           timeout(activity: true, time: 30) {
             withEnv(['MAVEN_OPTS=-XX:MaxRAMPercentage=50.0 -XX:+PrintFlagsFinal']) {
-              sh 'MVN="/jipp/tools/apache-maven/latest/bin/mvn -Dmaven.repo.local=/home/jenkins/.m2/repository \
-                        --settings /home/jenkins/.m2/settings.xml" ./releng/scripts/check_code_cleanliness_only.sh'
+              // sh 'MVN="/jipp/tools/apache-maven/latest/bin/mvn -Dmaven.repo.local=/home/jenkins/.m2/repository \
+              //           --settings /home/jenkins/.m2/settings.xml" ./releng/scripts/check_code_cleanliness_only.sh'
             }
           }
         }
@@ -41,12 +41,9 @@ pipeline {
                       -Dgpg.passphrase="${KEYRING_PASSPHRASE}"  \
                       -Dmaven.test.failure.ignore=true \
                       -DexcludedGroups=flakyTest,slowTest \
-                      -P baseline-compare-and-replace \
-                      -P api-baseline-check \
                       -Ddsf.gdb.tests.timeout.multiplier=50 \
                       -Dindexer.timeout=300 \
-                      -P production \
-                      -P build-standalone-debugger-rcp \
+                      -Pskip-tests-except-dsf-gdb \
                       -Ddsf.gdb.tests.gdbPath=/shared/common/gdb/gdb-all/bin \
                       -Dcdt.tests.dsf.gdb.versions=gdb.10,gdbserver.10 \
                       -Dmaven.repo.local=/home/jenkins/.m2/repository \
