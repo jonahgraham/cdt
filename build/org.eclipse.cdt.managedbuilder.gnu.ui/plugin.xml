@@ -565,7 +565,7 @@
                id="gnu.windres.option.preprocessor.undefined.symbols"/>
       </tool-->
       <tool
-            command="gcc"
+            command="as"
             name="%ToolName.assembler.gnu"
             outputFlag="-o"
             id="cdt.managedbuild.tool.gnu.assembler"
@@ -579,8 +579,6 @@
          <option
                name="%Option.Gnu.Assembler.Flags"
                category="gnu.asm.category.general"
-               commandGenerator="org.eclipse.cdt.managedbuilder.gnu.ui.GnuAsmFlagsCommandGenerator"
-               defaultValue="-c"
                valueType="string"
                id="gnu.both.asm.option.flags">
          </option>
@@ -609,7 +607,7 @@
                id="cdt.managedbuild.tool.gnu.assembler.input"
                languageId="org.eclipse.cdt.core.assembly"
                sourceContentType="org.eclipse.cdt.core.asmSource"
-               sources="s,sx,S">
+               sources="s,S">
          </inputType>
          <outputType
 			outputs="o"
