@@ -13,7 +13,7 @@ jobs:
       - name: Run Check Code Cleanliness with Docker
         uses: addnab/docker-run-action@v3
         with:
-          image: quay.io/eclipse-cdt/cdt-infra-plus-eclipse-install-github@sha256:6188eac52d93bcd532de6e6eb42f1065c5ff18c0bccb6461581f45e4a158d776
+          image: quay.io/eclipse-cdt/cdt-infra-plus-eclipse-install-github@sha256:448dd492ab17c81b114c6adb5dc431a54b63991bf21265f7b7af93aea3704f87
           options: -v ${{ github.workspace }}:/work --user 1001:127
           run: |
             set -x
