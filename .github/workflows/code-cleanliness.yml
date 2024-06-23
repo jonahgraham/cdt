@@ -9,12 +9,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - name: Run Check Code Cleanliness with Docker
         uses: addnab/docker-run-action@v3
         with:
           image: quay.io/eclipse-cdt/cdt-infra-plus-eclipse-install-github@sha256:448dd492ab17c81b114c6adb5dc431a54b63991bf21265f7b7af93aea3704f87
-          options: -v ${{ github.workspace }}:/work --user 1001:127
+          options: -v ${{ github.workspace }}:/work # --user 1001:127
           run: |
             set -x
             cd /work
