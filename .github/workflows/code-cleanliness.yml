@@ -17,11 +17,8 @@ jobs:
           options: -v ${{ github.workspace }}:/work --user 1001:127
           run: |
             set -x
-            ls -la /
-            ls -la /work
-            whoami
             cd /work
-            xvfb-run -a ./releng/scripts/check_code_cleanliness_only.sh
+            ./releng/scripts/check_code_cleanliness_only.sh
             ./releng/scripts/check_bundle_versions.sh
             ./releng/scripts/check_bundle_versions_report.sh
       - name: Upload Logs
