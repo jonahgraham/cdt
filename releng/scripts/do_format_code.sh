@@ -44,7 +44,9 @@ fi
     $PWD -data check_code_cleanliness_workspace &
 PID=$!
 
+set +e
 while true; do
+  sleep 1s
   echo
   echo "Contents of log"
   cat check_code_cleanliness_workspace/.metadata/.log
