@@ -28,7 +28,7 @@ for image in $images; do
     hashname=$(docker inspect --format='{{index .RepoDigests 0}}' $image)
     echo $image "-->" $hashname
     nameonly=$(echo $image | sed -es,:.*,,)
-    find $toplevel -name \*\.Jenkinsfile -or -name \*\.yaml | while read file; do
+    find $toplevel -name \*\.Jenkinsfile -or -name \*\.yaml -or -name \*\.yml | while read file; do
         sed -i "s#image: $namespace/$nameonly[:@].*#image: $hashname#" $file
         git add $file
     done
