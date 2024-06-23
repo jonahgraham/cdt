@@ -21,7 +21,7 @@ jobs:
             ls -la /work
             whoami
             cd /work
-            ./releng/scripts/check_code_cleanliness_only.sh
+            xvfb-run -a ./releng/scripts/check_code_cleanliness_only.sh
             ./releng/scripts/check_bundle_versions.sh
             ./releng/scripts/check_bundle_versions_report.sh
       - name: Upload Logs

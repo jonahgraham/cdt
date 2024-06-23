@@ -11,6 +11,7 @@
 ###############################################################################
 
 set -e
+set -x
 
 ##
 # This script is reused by other projects, if so, COREPROJECT should be set
@@ -40,5 +41,16 @@ fi
 "${ECLIPSE}" \
     -consolelog -nosplash -application org.eclipse.jdt.core.JavaCodeFormatter \
     -config $CDTDIR/$COREPROJECT/.settings/org.eclipse.jdt.core.prefs \
-    $PWD -data check_code_cleanliness_workspace
+    $PWD -data check_code_cleanliness_workspace &
+PID=$!
+
+while true; do
+  echo
+  echo "Contents of log"
+  cat check_code_cleanliness_workspace/.metadata/.log
+  echo "files in workspace of log"
+  find check_code_cleanliness_workspace
+done
+
+wait $PID
 rm -rf check_code_cleanliness_workspace
