@@ -5,3 +5,5 @@ RUN chown -R 1001:0 ${HOME} \
   && chmod -R g+rwX ${HOME}
 
 USER 1001
+
+CMD ["/bin/bash"]
