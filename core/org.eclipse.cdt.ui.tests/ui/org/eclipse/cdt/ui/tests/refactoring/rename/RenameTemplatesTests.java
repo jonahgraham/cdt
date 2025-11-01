@@ -18,6 +18,7 @@ import java.io.StringWriter;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -51,6 +52,8 @@ public class RenameTemplatesTests extends RenameTestBase {
 		assertTotalChanges(4, ch);
 	}
 
+	@Test
+	@Disabled("Known failure")
 	public void _testRenameSpecializations_bug240692() throws Exception {
 		StringWriter writer = new StringWriter();
 
