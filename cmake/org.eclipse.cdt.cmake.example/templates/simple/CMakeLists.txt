@@ -6,10 +6,7 @@ project (${projectName?replace(" ", "_")}
 	DESCRIPTION "A Hello World Project")
 
 # This project will output an executable file
-add_executable(${r"${PROJECT_NAME}"} ${projectName?replace(" ", "_")}.cpp)
-
-# Create a simple configuration header
-configure_file(config.h.in config.h)
+add_executable(${r"${PROJECT_NAME}"} src/${projectName?replace(" ", "_")}.cpp)
 
 # Include the configuration header in the build
 target_include_directories(${r"${PROJECT_NAME}"} PUBLIC "${r"${PROJECT_BINARY_DIR}"}")

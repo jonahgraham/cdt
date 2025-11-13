@@ -3,9 +3,8 @@
 		dest="/${projectName}/.clangd"/>
 	<file src="/templates/simple/CMakeLists.txt"
 		dest="/${projectName}/CMakeLists.txt"/>
-	<file src="/templates/simple/config.h.in"
-		dest="/${projectName}/config.h.in"/>
-	<file src="/templates/simple/main.cpp"
-		dest='/${projectName}/${projectName?replace(" ", "_")}.cpp'
+	<file src="/templates/simple/src/main.cpp"
+		dest='/${projectName}/src/${projectName?replace(" ", "_")}.cpp'
 		open="true"/>
+	<srcRoot dir="src" />
 </templateManifest>
